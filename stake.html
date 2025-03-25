@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerStake PLP</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://powercoin-pwr.com/wp-content/uploads/2023/06/background-scaled.webp') no-repeat center center fixed;
+            background-size: cover;
+            color: #d1d5db;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        header {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #00b7eb;
+        }
+        header img.logo {
+            width: 150px;
+            filter: brightness(80%);
+        }
+        nav {
+            margin-top: 15px;
+        }
+        nav a {
+            color: #00b7eb;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ffffff;
+        }
+        .container {
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 40px auto;
+            box-shadow: 0 0 20px rgba(0, 183, 235, 0.2);
+            border: 1px solid #00b7eb;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #00b7eb;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(0, 183, 235, 0.5);
+        }
+        h2 {
+            font-size: 1.8em;
+            color: #00b7eb;
+            margin: 30px 0 15px;
+            text-transform: uppercase;
+        }
+        button {
+            background: #00b7eb;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: #1f2937;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background: #0284c7;
+            transform: scale(1.05);
+        }
+        input, select {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #00b7eb;
+            background: rgba(255, 255, 255, 0.05);
+            color: #d1d5db;
+            width: calc(100% - 24px);
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #0284c7;
+            outline: none;
+        }
+        #walletStatus {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #walletStatus span {
+            margin-left: 15px;
+            font-size: 1.1em;
+            color: #d1d5db;
+        }
+        #plpBalance, #aprDisplay {
+            margin: 15px 0;
+            font-size: 1.2em;
+            color: #00b7eb;
+            text-align: center;
+        }
+        #status {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 10px;
+            font-size: 1em;
+            text-align: center;
+            color: #d1d5db;
+            border: 1px solid #00b7eb;
+        }
+        #stakeTable {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #stakeTable th, #stakeTable td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 183, 235, 0.1);
+        }
+        #stakeTable th {
+            background: #00b7eb;
+            color: #1f2937;
+            text-transform: uppercase;
+        }
+        #stakeTable td {
+            color: #d1d5db;
+        }
+        #stakeTable button {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+        #stakeTable tr:hover {
+            background: rgba(0, 183, 235, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://powercoin-pwr.com/wp-content/uploads/2023/06/logo.webp" alt="PowerStake PLP Logo" class="logo">
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Stake</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>PowerStake PLP</h1>
+        <div id="walletStatus">
+            <button id="connectButton">Connect Wallet</button>
+            <span id="walletText">Not Connected</span>
+        </div>
+        <div id="plpBalance">PLP Balance: 0</div>
+        <div id="aprDisplay">Current APR: Calculating...</div>
+        <div>
+            <h2>Stake PLP</h2>
+            <input type="number" id="plpAmount" placeholder="PLP Amount (e.g., 100)" min="1">
+            <select id="stakeDuration">
+                <option value="2592000">30 Days</option>
+                <option value="5184000">60 Days</option>
+                <option value="7776000">90 Days</option>
+                <option value="15552000">180 Days</option>
+                <option value="31104000">360 Days</option>
+            </select>
+            <button id="approveButton">Approve PLP</button>
+            <button id="stakeButton">Stake PLP</button>
+        </div>
+        <div>
+            <h2>Claim Rewards</h2>
+            <input type="number" id="stakeIndex" placeholder="Stake Index (e.g., 0)" min="0">
+            <button id="claimButton">Claim Rewards</button>
+        </div>
+        <div>
+            <h2>Active Stakes</h2>
+            <table id="stakeTable">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>PLP Amount</th>
+                        <th>Duration (Days)</th>
+                        <th>Reward (PWR)</th>
+                        <th>Progress</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="stakeTableBody"></tbody>
+            </table>
+        </div>
+        <div id="status"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.4/dist/web3.min.js"></script>
+    <script>
+        const contractAddress = "0xf02C2bc44C3DCF8709C1A20b2c677d90817f4496";
+        const plpTokenAddress = "0xe5c56E4a8F8d96e3A91b18D83b7f0c36663C9a74";
+        const chainId = 369; // PulseChain Mainnet
+        const rpcUrl = "https://rpc.pulsechain.com";
+
+        const contractABI = [
+            {"inputs":[],"stateMutability":"nonpayable","type":"constructor"},
+            {"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"newAPR","type":"uint256"}],"name":"APRUpdated","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"stakeIndex","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"penalty","type":"uint256"}],"name":"EarlyWithdrawn","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"stakeIndex","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"pwrReward","type":"uint256"}],"name":"RewardsClaimed","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"RewardsInitialized","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"plpAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"spwrAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"duration","type":"uint256"}],"name":"Staked","type":"event"},
+            {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"stakeIndex","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"plpAmount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"pwrReward","type":"uint256"}],"name":"Withdrawn","type":"event"},
+            {"inputs":[],"name":"APR_REDUCTION","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"BURN_PERCENT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"CLAIM_WINDOW","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"MIN_APR","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PENALTY_PERCENT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PERIOD_180_DAYS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PERIOD_30_DAYS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PERIOD_360_DAYS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PERIOD_60_DAYS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PERIOD_90_DAYS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"PWR_THRESHOLD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"TOP_STAKES","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"addRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allStakes","outputs":[{"internalType":"uint256","name":"plpAmount","type":"uint256"},{"internalType":"uint256","name":"spwrAmount","type":"uint256"},{"internalType":"uint256","name":"startBlock","type":"uint256"},{"internalType":"uint256","name":"endBlock","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"pwrReward","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"},{"internalType":"bool","name":"active","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approvePLP","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"stakeIndex","type":"uint256"}],"name":"claimRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[],"name":"currentAPR","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"distributedPwrRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"stakeIndex","type":"uint256"}],"name":"earlyWithdrawStake","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[],"name":"getAllStakes","outputs":[{"components":[{"internalType":"uint256","name":"plpAmount","type":"uint256"},{"internalType":"uint256","name":"spwrAmount","type":"uint256"},{"internalType":"uint256","name":"startBlock","type":"uint256"},{"internalType":"uint256","name":"endBlock","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"pwrReward","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"},{"internalType":"bool","name":"active","type":"bool"}],"internalType":"struct PowerStake.Stake[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"getRemainingRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getStakeHistory","outputs":[{"components":[{"internalType":"uint256","name":"plpAmount","type":"uint256"},{"internalType":"uint256","name":"spwrAmount","type":"uint256"},{"internalType":"uint256","name":"startBlock","type":"uint256"},{"internalType":"uint256","name":"endBlock","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"pwrReward","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"},{"internalType":"bool","name
