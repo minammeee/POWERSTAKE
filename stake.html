@@ -7,8 +7,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: url('https://powercoin-pwr.com/wp-content/uploads/2023/06/background-scaled.webp') no-repeat center center fixed;
-            background-size: cover;
+            background: linear-gradient(135deg, #1a1a1a, #2d3748);
             color: #d1d5db;
             margin: 0;
             padding: 0;
@@ -20,9 +19,12 @@
             text-align: center;
             border-bottom: 2px solid #00b7eb;
         }
-        header img.logo {
-            width: 150px;
-            filter: brightness(80%);
+        header h1.logo {
+            font-size: 2em;
+            color: #00b7eb;
+            margin: 0;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(0, 183, 235, 0.5);
         }
         nav {
             margin-top: 15px;
@@ -149,7 +151,7 @@
 </head>
 <body>
     <header>
-        <img src="https://powercoin-pwr.com/wp-content/uploads/2023/06/logo.webp" alt="PowerStake PLP Logo" class="logo">
+        <h1 class="logo">PowerStake PLP</h1>
         <nav>
             <a href="#">Home</a>
             <a href="#">Stake</a>
@@ -238,4 +240,26 @@
             {"inputs":[{"internalType":"uint256","name":"stakeIndex","type":"uint256"}],"name":"earlyWithdrawStake","outputs":[],"stateMutability":"nonpayable","type":"function"},
             {"inputs":[],"name":"getAllStakes","outputs":[{"components":[{"internalType":"uint256","name":"plpAmount","type":"uint256"},{"internalType":"uint256","name":"spwrAmount","type":"uint256"},{"internalType":"uint256","name":"startBlock","type":"uint256"},{"internalType":"uint256","name":"endBlock","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"pwrReward","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"},{"internalType":"bool","name":"active","type":"bool"}],"internalType":"struct PowerStake.Stake[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},
             {"inputs":[],"name":"getRemainingRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getStakeHistory","outputs":[{"components":[{"internalType":"uint256","name":"plpAmount","type":"uint256"},{"internalType":"uint256","name":"spwrAmount","type":"uint256"},{"internalType":"uint256","name":"startBlock","type":"uint256"},{"internalType":"uint256","name":"endBlock","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"pwrReward","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"},{"internalType":"bool","name
+            {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getStakeHistory","outputs":[{"components":[{"internalType":"uint256","name":"plpAmount","type":"uint256"},{"internalType":"uint256","name":"spwrAmount","type":"uint256"},{"internalType":"uint256","name":"startBlock","type":"uint256"},{"internalType":"uint256","name":"endBlock","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"pwrReward","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"},{"internalType":"bool","name":"active","type":"bool"}],"internalType":"struct PowerStake.Stake[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"initializeRewards","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"periodBonuses","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"plpToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"pulseXRouter","outputs":[{"internalType":"contract IPulseXRouter","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"pwrToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"bool","name":"_paused","type":"bool"}],"name":"setPaused","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"spwrBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"stakeCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"plpAmount","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"}],"name":"stakePLP","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"stakes","outputs":[{"internalType":"uint256","name":"plpAmount","type":"uint256"},{"internalType":"uint256","name":"spwrAmount","type":"uint256"},{"internalType":"uint256","name":"startBlock","type":"uint256"},{"internalType":"uint256","name":"endBlock","type":"uint256"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"pwrReward","type":"uint256"},{"internalType":"bool","name":"claimed","type":"bool"},{"internalType":"bool","name":"active","type":"bool"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"totalPwrRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[],"name":"totalSpwrSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},
+            {"inputs":[],"name":"usdtToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"stakeIndex","type":"uint256"}],"name":"withdrawStake","outputs":[],"stateMutability":"nonpayable","type":"function"}
+        ];
+
+        const plpABI = [
+            {"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"amount","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"type":"function"},
+            {"constant":true,"inputs":[{"name":"account","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"type":"function"}
